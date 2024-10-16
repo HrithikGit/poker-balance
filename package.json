@@ -2,7 +2,7 @@
   "name": "poker-balance",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://HrithikGit.github.io/react-apps/poker-bill-app",
+  "homepage": "https://HrithikGit.github.io/poker-balance",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
