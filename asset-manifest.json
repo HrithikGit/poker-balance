@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/react-apps/poker-bill-app/static/css/main.df7a76ac.css",
-    "main.js": "/react-apps/poker-bill-app/static/js/main.2200a12c.js",
-    "index.html": "/react-apps/poker-bill-app/index.html",
-    "main.df7a76ac.css.map": "/react-apps/poker-bill-app/static/css/main.df7a76ac.css.map",
-    "main.2200a12c.js.map": "/react-apps/poker-bill-app/static/js/main.2200a12c.js.map"
+    "main.css": "/poker-balance/static/css/main.df7a76ac.css",
+    "main.js": "/poker-balance/static/js/main.2200a12c.js",
+    "index.html": "/poker-balance/index.html",
+    "main.df7a76ac.css.map": "/poker-balance/static/css/main.df7a76ac.css.map",
+    "main.2200a12c.js.map": "/poker-balance/static/js/main.2200a12c.js.map"
   },
   "entrypoints": [
     "static/css/main.df7a76ac.css",
