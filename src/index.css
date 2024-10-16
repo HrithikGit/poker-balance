@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   color: #495057;
   display: flex;
   align-items: center;
@@ -61,6 +61,7 @@ body {
   gap: 0.4rem;
   font-size: 1.4rem;
   margin-bottom: 2rem;
+  overflow-y: auto;
 }
 
 .sidebar li {
@@ -200,11 +201,14 @@ form h2 {
 @media (max-width: 768px) {
   .app {
     flex-direction: column;
+    height: 100%;
+    overflow: scroll;
   }
 
   .sidebar {
     margin-right: 0;
     margin-bottom: 20px;
+    overflow-y: auto;
   }
 
   .poker-form {

@@ -2,7 +2,9 @@ import { useState, useEffect, Fragment } from "react";
 
 let list =
   localStorage.getItem("friendsList") === null
-    ? [{ id: 12345, name: "Hrithik", balance: 0, played: true, desc: "" }]
+    ? JSON.stringify([
+        { id: 12345, name: "Hrithik", balance: 0, played: true, desc: "" },
+      ])
     : localStorage.getItem("friendsList");
 
 const initialFriends = JSON.parse(list);
@@ -24,6 +26,10 @@ export default function App() {
     if (friendsCopy.length <= 1) {
       alert("There should be minimum two players");
       return;
+    }
+
+    if (coins === 0 || cost === 0) {
+      alert("Please specify coins and cost of game");
     }
 
     if (!(sum === totalPlayers * coins)) {
