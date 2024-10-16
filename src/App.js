@@ -1,5 +1,11 @@
 import { useState, useEffect, Fragment } from "react";
-const initialFriends = JSON.parse(localStorage.getItem("friendsList"));
+
+let list =
+  localStorage.getItem("friendsList") === null
+    ? [{ id: 12345, name: "Hrithik", balance: 0, played: true, desc: "" }]
+    : localStorage.getItem("friendsList");
+
+const initialFriends = JSON.parse(list);
 
 export default function App() {
   const [friends, setFriends] = useState(initialFriends);
