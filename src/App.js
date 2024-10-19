@@ -61,6 +61,8 @@ export default function App() {
       let firstBalance = friendsCopy[start].finalAmount.toFixed(2);
       let lastBalance = Math.abs(friendsCopy[end].finalAmount).toFixed(2);
 
+      if (firstBalance === 0) break;
+
       if (firstBalance >= lastBalance) {
         firstBalance -= lastBalance;
         friendsCopy[end].desc = getText(
@@ -103,6 +105,7 @@ export default function App() {
   }
 
   function getText(curr, name, amount, owe = true) {
+    if (amount === 0) return curr;
     if (owe)
       return curr.length == 0
         ? `You owe ${name} ${Math.abs(amount)}$`
