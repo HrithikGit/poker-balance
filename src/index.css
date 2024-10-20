@@ -215,3 +215,9 @@ form h2 {
     margin-top: 20px;
   }
 }
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

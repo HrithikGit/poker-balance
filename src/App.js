@@ -15,13 +15,13 @@ export default function App() {
 
   function handleBalances(e, friendsCopy, coins, cost) {
     e.preventDefault();
-    console.log(friendsCopy);
     friendsCopy = friendsCopy.filter((friend) => friend.played);
     let sum = friendsCopy.reduce(
       (sum, friend) => sum + parseInt(friend.balance),
       0
     );
     let totalPlayers = friendsCopy.length;
+    const epsilon = 0.01;
 
     if (friendsCopy.length <= 1) {
       alert("There should be minimum two players");
@@ -45,21 +45,23 @@ export default function App() {
     }
 
     let ratio = coins / cost;
-    console.log(ratio);
+    // console.log(ratio);
+    console.log(friendsCopy);
     friendsCopy = friendsCopy.map((friend) => ({
       ...friend, // Keep the rest of the friend's properties intact
       desc: "",
       finalAmount: parseInt(friend.balance) / ratio - cost, // Update the balance
     }));
 
-    friendsCopy = friendsCopy.sort((a, b) => b.balance - a.balance);
-    console.log(friendsCopy);
+    friendsCopy = friendsCopy.sort((a, b) => b.finalAmount - a.finalAmount);
+
     let start = 0,
       end = friendsCopy.length - 1;
 
     while (start < end) {
       let firstBalance = friendsCopy[start].finalAmount.toFixed(2);
-      let lastBalance = Math.abs(friendsCopy[end].finalAmount).toFixed(2);
+      if (firstBalance < 0) break; //Breaking if everyone in profits are balanced
+      let lastBalance = Math.abs(friendsCopy[end].finalAmount.toFixed(2));
 
       if (firstBalance === 0) break;
 
@@ -77,6 +79,7 @@ export default function App() {
           false
         );
         friendsCopy[start].finalAmount = firstBalance;
+        friendsCopy[end].finalAmount = 0;
         end--;
       } else {
         lastBalance -= firstBalance;
@@ -94,7 +97,8 @@ export default function App() {
           false
         );
 
-        friendsCopy[end].finalAmount = lastBalance;
+        friendsCopy[end].finalAmount = -lastBalance;
+        friendsCopy[start].finalAmount = 0;
         start++;
       }
     }
@@ -119,7 +123,7 @@ export default function App() {
   function handleAddFriend(e, name, image, setName, setImage) {
     e.preventDefault();
     if (!name.trim()) return;
-    console.log(name);
+    // console.log(name);
     setFriends((friends) => [
       ...friends,
       { id: Date.now(), name, image, played: true, balance: 0, finalAmount: 0 },
@@ -129,7 +133,7 @@ export default function App() {
   }
 
   function handlePlayedStatus(id) {
-    console.log(id);
+    // console.log(id);
     setFriends((friends) =>
       friends.map(
         (friend) =>
@@ -140,22 +144,38 @@ export default function App() {
     );
   }
 
+  function handleReset() {
+    localStorage.setItem(
+      "friendsList",
+      JSON.stringify([
+        { id: 12345, name: "Hrithik", balance: 0, played: true, desc: "" },
+      ])
+    );
+    window.reload();
+  }
+
   return (
-    <div className="app">
-      <div className="sidebar">
-        <FriendsList
+    <>
+      <div className="app">
+        <div className="sidebar">
+          <FriendsList
+            friends={friends}
+            handlePlayedStatus={handlePlayedStatus}
+          />
+          {showAddFriend && <FormAddFriend handleAddFriend={handleAddFriend} />}
+          <Button
+            onClick={() => setShowAddFriend((showAddFriend) => !showAddFriend)}
+          >
+            {!showAddFriend ? "Add Friend" : "Close"}
+          </Button>
+        </div>
+        <PokerForm
           friends={friends}
-          handlePlayedStatus={handlePlayedStatus}
+          handleBalances={handleBalances}
+          handleReset={handleReset}
         />
-        {showAddFriend && <FormAddFriend handleAddFriend={handleAddFriend} />}
-        <Button
-          onClick={() => setShowAddFriend((showAddFriend) => !showAddFriend)}
-        >
-          {!showAddFriend ? "Add Friend" : "Close"}
-        </Button>
       </div>
-      <PokerForm friends={friends} handleBalances={handleBalances} />
-    </div>
+    </>
   );
 }
 
@@ -228,7 +248,7 @@ function FormAddFriend({ handleAddFriend }) {
   );
 }
 
-function PokerForm({ friends, handleBalances }) {
+function PokerForm({ friends, handleBalances, handleReset }) {
   const [cost, setCost] = useState(0);
   const [coins, setCoins] = useState(0);
 
@@ -251,7 +271,7 @@ function PokerForm({ friends, handleBalances }) {
       )
     );
 
-    console.log(friendsCopy);
+    // console.log(friendsCopy);
   }
 
   return (
@@ -284,9 +304,12 @@ function PokerForm({ friends, handleBalances }) {
             </Fragment>
           )
       )}
-      <Button onClick={(e) => handleBalances(e, friendsCopy, coins, cost)}>
-        Balance
-      </Button>
+      <div className="btn-container">
+        <Button onClick={() => handleReset()}> Reset !</Button>
+        <Button onClick={(e) => handleBalances(e, friendsCopy, coins, cost)}>
+          Balance
+        </Button>
+      </div>
     </form>
   );
 }
