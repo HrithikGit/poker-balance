@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/poker-balance/static/css/main.9797554e.css",
-    "main.js": "/poker-balance/static/js/main.71e95de7.js",
+    "main.css": "/poker-balance/static/css/main.5077f890.css",
+    "main.js": "/poker-balance/static/js/main.8b290401.js",
     "index.html": "/poker-balance/index.html",
-    "main.9797554e.css.map": "/poker-balance/static/css/main.9797554e.css.map",
-    "main.71e95de7.js.map": "/poker-balance/static/js/main.71e95de7.js.map"
+    "main.5077f890.css.map": "/poker-balance/static/css/main.5077f890.css.map",
+    "main.8b290401.js.map": "/poker-balance/static/js/main.8b290401.js.map"
   },
   "entrypoints": [
-    "static/css/main.9797554e.css",
-    "static/js/main.71e95de7.js"
+    "static/css/main.5077f890.css",
+    "static/js/main.8b290401.js"
   ]
 }
