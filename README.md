@@ -66,3 +66,8 @@ This React-based webpage is designed to assist users in calculating how much eac
 3. npm install
 4. npm start
 5. http://localhost:3000
+
+The website is live at https://hrithikgit.github.io/poker-balance/
+
+Here is the screenshot
+![Alt text](<Screenshot 2024-10-20 at 2.09.31 PM.png>)
